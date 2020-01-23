@@ -1,0 +1,73 @@
+–––––––––––––––––––––––
+ Building a Logic Gate
+–––––––––––––––––––––––
+
+Process:
+ • Design the gate architecture
+ • Specify the architecture in HDL
+ • Test the chip in a hardware simulator
+ • Optimize the design
+ • Realize the optimized design in silicon
+
+
+––––––––––––––
+ The Xor Gate
+––––––––––––––
+
+a Xor b = (a And Not(b)) Or (Not(a) And b)
+
+    a –––––––––––––––––\
+        |               AND––
+         –––NOT––    ––/     \
+                 \ /          \
+                  X            OR–––
+                 / \          /
+         –––NOT––    ––\     /
+        |               AND––
+    b –––––––––––––––––/
+
+
+––––––––––––––––––––––––––––––––––
+ Design: From gate diagram to HDL
+––––––––––––––––––––––––––––––––––
+
+* separate .hdl file in this directory
+
+The HDL file should look something like this:
+
+
+/** Xor gate: out = (a And Not(b)) Or (Not(a) And b)) */
+
+CHIP Xor {
+	IN a, b;
+	OUT out;
+	PARTS:
+	// implementation missing
+}
+
+
+
+
+Filling in the blanks:
+
+
+/** Xor gate: out = (a And Not(b)) Or (Not(a) And b)) */
+
+CHIP Xor {
+	IN a, b;
+	OUT out;
+	PARTS:
+	Not (in=a, out=nota);
+	Not (in=b, out=notb);
+	And (a=a, b=notb, out=aAndNotb);
+	And (a=nota, b=b, out=notaAndb);
+	Or (a=aAndNotb, b=notaAndb, out=out);
+}
+
+
+
+
+
+
+
+
